@@ -1,87 +1,75 @@
 <template>
-  <view class="container">
-    <scroll-view class="todo-list">
-      <animated:view :style="{
-        opacity: dimmingAnimation
-      }">
-        <text class="text-header">Your TODO list</text>
-
-        <todo-item
-          v-for="(todo, index) in todoList"
-          :index="index"
+<view class="container">
+  <scroll-view class="todo-list">
+    <animated:view :style="{
+                           opacity: dimmingAnimation
+                           }">
+      <text class="text-header">Products</text>
+      
+      <TodoItem
+        v-for="(todo, index) in todoList"
+        :index="index"
+        :text="todo.text"
+        :onPress="markTodoAsDone"
+        :key="index"></TodoItem>
+      
+      <view v-if="doneList.length > 0">
+        <text class="text-header">Done</text>
+        <TodoItem
+          v-for="(todo, index) in doneList"
           :text="todo.text"
-          :onPress="markTodoAsDone"
-          :key="index"></todo-item>
-
-        <view v-if="doneList.length > 0">
-          <text class="text-header">Done</text>
-          <todo-item
-            v-for="(todo, index) in doneList"
-            :text="todo.text"
-            :index="index"
-            :onPress="()=>{}"
-            :key="index"
-            :done="true">
-          </todo-item>
-          <touchable-opacity
-            :onPress="() => { doneList = [] }"
-            :style="{ justifySelf: 'center', alignItems: 'center', marginVertical: 10 }">
-            <text>Clear all</text>
-          </touchable-opacity>
-        </view>
-
-        <view class="empty-space"></view>
-
-      </animated:view>
-    </scroll-view>
-
-    <view
-      class="addItemContainer"
-      :class="newTodoScreen ? '':'hidden'"
-      :style="{shadowOffset: {height: 0, width: 0}}">
-
-      <text class="text-header">Add new todo</text>
-
-      <text-input
-        class="text-input"
-        placeholder="Buy a piano"
-        v-model="newTodoText"
-        />
-
-      <touchable-opacity
-        title="add"
-        class="button2"
-        :onPress="()=> { addTodo() }">
-        <text class="text-button">Add</text>
-      </touchable-opacity>
-    </view>
-
-    <touchable-opacity
-      class="addItemButton"
-      title="add"
-      :style="{
-        shadowOffset: {height: 2, width: 0}
-      }"
-      :onPress="()=>{ newTodoScreen = !newTodoScreen }">
-
-      <view>
-        <animated:view
-          :style="{
-            transform: [{rotate: rotateAnimation}]
-          }">
-          <image :source="plusIcon" class="image-plus"></image>
-        </animated:view>
+          :index="index"
+          :onPress="()=>{}"
+          :key="index"
+          :done="true">
+        </TodoItem>
+        <touchable-opacity
+          :onPress="() => { doneList = [] }"
+          :style="{ justifySelf: 'center', alignItems: 'center', marginVertical: 10 }">
+          <text>Clear all</text>
+        </touchable-opacity>
       </view>
-
-    </touchable-opacity>
+      
+      <view class="empty-space"></view>
+      
+    </animated:view>
+  </scroll-view>
+  
+  <view
+    class="addItemContainer"
+    :class="newTodoScreen ? '':'hidden'"
+    :style="{shadowOffset: {height: 0, width: 0}}">
+    
+    <text class="text-header">Add new todo</text>
+    
+    <text-input
+      class="text-input"
+      placeholder="Buy a piano"
+      v-model="newTodoText" 
+      />
+    
+    <nb-button full iconLeft light
+      :onPress="()=> { addTodo() }">
+      <nb-icon active name="checkmark"  :style="{ fontSize: 30, color: 'blue' }" />
+      <nb-text :style="{ color: 'blue' }">Add</nb-text>
+    </nb-button>
+  </view>
+  
+  <nb-button iconLeft light
+             :onPress="()=>{ newTodoScreen = !newTodoScreen }" >
+    <nb-icon active name="add"  :style="{ fontSize: 30, color: 'red' }" />
+    <nb-text :style="{ color: 'red' }">Add</nb-text>
+  </nb-button>
+  
   </view>
 
 </template>
 
 <script>
-// (setq syntax-ppss-table nil)
-import React from "react";
-// const __react__vue__options = {};
+import Vue from "vue-native-core";
+import { VueNativeBase } from "native-base";
+Vue.use(VueNativeBase);
+
 import TodoItem from './src/components/TodoItem'
 import plusIcon from './assets/add.png'
 import { Animated, Easing } from "react-native";
@@ -94,11 +82,11 @@ export default {
   data: function () {
     return {
       plusIcon,
-      todoList:      [],
-      doneList:      [],
-      newTodoScreen: false,
-      newTodoText: '',
-      rotateAnimation: {},
+      todoList:         [],
+      doneList:         [],
+      newTodoScreen:    false,
+      newTodoText:      '',
+      rotateAnimation:  {},
       dimmingAnimation: {},
       buttonRotationDeg: 0,
       todoListOpacity: 1
@@ -121,38 +109,33 @@ export default {
       outputRange: [0.1, 1]
     })
   },
+  
   methods: {
     markTodoAsDone (index) {
       this.doneList.push(this.todoList[index])
       this.todoList.splice(index, 1)
     },
+    
     addTodo () {
       if (this.newTodoText !== '') {
         this.todoList.push({text: this.newTodoText})
         this.newTodoScreen = false
       }
     },
-    rotateButton () {
-      this.buttonRotationDeg.setValue(this.newTodoScreen ? 0:1)
-      Animated.timing(this.buttonRotationDeg, {
-        toValue: this.newTodoScreen ? 1:0,
-        duration: 120,
-        easing: Easing.linear
-      }).start()
-    },
+    
     dimTodoList () {
-      this.todoListOpacity.setValue(this.newTodoScreen ? 1:0)
+      this.todoListOpacity.setValue(this.newTodoScreen ? 1 : 0)
       Animated.timing(this.todoListOpacity, {
-        toValue: this.newTodoScreen ? 0:1,
-        duration: 90,
-        easing: Easing.linear
+        toValue:    (this.newTodoScreen ? 0 : 1),
+        duration:   90,
+        easing:     Easing.linear
       }).start()
     }
   },
+  
   watch: {
     newTodoScreen () {
       this.newTodoText = ''
-      this.rotateButton()
       this.dimTodoList()
     }
   }
