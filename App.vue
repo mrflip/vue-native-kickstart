@@ -19,7 +19,7 @@
           v-for="(todo, index) in doneList"
           :text="todo.text"
           :index="index"
-          :onPress="()=>{}"
+          :onPress="restoreTodoToList"
           :key="index"
           :done="true">
         </TodoItem>
@@ -115,6 +115,11 @@ export default {
       this.doneList.push(this.todoList[index])
       this.todoList.splice(index, 1)
     },
+
+    restoreTodoToList (index) {
+      this.todoList.push(this.doneList[index])
+      this.doneList.splice(index, 1)
+      },
     
     addTodo () {
       if (this.newTodoText !== '') {
