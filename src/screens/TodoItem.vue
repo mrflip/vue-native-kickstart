@@ -4,7 +4,7 @@
 
     <nb-button transparent
                class="check-btn"
-               :class="done ? 'check-btn--done':'check-btn--normal'"
+               :class="done ? 'check-btn--done' : 'check-btn--normal'"
                :on-press="() => {onPress(index)}">
       <nb-icon active name="checkmark"
                class="check-btn-icon"/>

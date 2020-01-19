@@ -1,9 +1,10 @@
 <template>
-<view class="container">
+  <nb-container :style="{ backgroundColor: '#fff' }">
+
+<HamburgerHeader title="Products" :navigation="this.props.navigation" />
+
 <scroll-view class="todo-list">
-  <animated:view :style="{
-                         opacity: dimmingAnimation
-                         }">
+  <animated:view :style="{ opacity: dimmingAnimation }">
     <text class="text-header">Products</text>
     
     <TodoItem
@@ -50,7 +51,7 @@
   
   <nb-button full iconLeft light
              :onPress="()=> { addTodo() }">
-    <nb-icon active name="checkmark"  :style="{ fontSize: 30, color: 'blue' }" />
+    <nb-icon active name="checkmark" :style="{ fontSize: 30, color: 'blue' }"  />
     <nb-text :style="{ color: 'blue' }">Add</nb-text>
   </nb-button>
 </view>
@@ -58,19 +59,18 @@
  <nb-fab 
    :onPress="()=>{ newTodoScreen = !newTodoScreen }"
    position="bottomRight"
+   :style="{ color: 'red' }"
    >
-   <nb-icon active  name="add" :style="{ fontSize: 50, color: 'red' }" />
+   <nb-icon active name="add" />
  </nb-fab>
  
-</view>
+</nb-container>
 </template>
 
 <script>
-import React from "react";
 import { Animated, Easing } from "react-native";
-import Vue from "vue-native-core";
-import { VueNativeBase } from "native-base";
-Vue.use(VueNativeBase);
+
+import HamburgerHeader from "./HamburgerHeader.vue";
 import TodoItem             from './TodoItem';
   
 export default {
@@ -87,18 +87,19 @@ export default {
   },
   
   components: {
-    TodoItem
+    TodoItem,
+    HamburgerHeader,
   },
   
   created () {
     this.buttonRotationDeg = new Animated.Value(0)
     this.todoListOpacity = new Animated.Value(1)
     this.rotateAnimation = this.buttonRotationDeg.interpolate({
-      inputRange: [0, 1],
+      inputRange:  [0, 1],
       outputRange: ['0deg', '45deg']
     })
     this.dimmingAnimation = this.todoListOpacity.interpolate({
-      inputRange: [0, 1],
+      inputRange:  [0, 1],
       outputRange: [0.1, 1]
     })
   },
@@ -149,7 +150,7 @@ export default {
   flex:                1;
   }
 
-  .text-color-primary {
+.text-color-primary {
   color:               white;
 }
 

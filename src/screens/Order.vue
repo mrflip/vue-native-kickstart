@@ -1,30 +1,26 @@
 <template>
-  <nb-container :style="{ backgroundColor: '#fff' }">
-    <nb-header>
-      <nb-left>
-        <nb-button
-          transparent
-          :onPress="() => this.props.navigation.openDrawer()"
-        >
-          <nb-icon name="menu" />
-        </nb-button>
-      </nb-left>
-      <nb-body>
-        <nb-title>Header</nb-title>
-      </nb-body>
-      <nb-right />
-    </nb-header>
+<nb-container :style="{ backgroundColor: '#fff' }">
+  <HamburgerHeader title="Orders" :navigation="this.props.navigation" />
 
-    <nb-content padder>
-      <nb-text>List of Products</nb-text>
-    </nb-content>
+  <nb-content padder>
+    <nb-text>List of Products</nb-text>
+  </nb-content>
 
-    <nb-footer>
-      <nb-footer-tab>
-        <nb-button active full>
-          <nb-text>Footer</nb-text>
-        </nb-button>
-      </nb-footer-tab>
-    </nb-footer>
-  </nb-container>
+  <nb-footer>
+    <nb-footer-tab>
+      <nb-button active full>
+        <nb-text>Footer</nb-text>
+      </nb-button>
+    </nb-footer-tab>
+  </nb-footer>
+</nb-container>
 </template>
+
+
+<script>
+  import HamburgerHeader from "./HamburgerHeader.vue";
+  
+  export default {
+    components: { HamburgerHeader }
+  };
+</script>

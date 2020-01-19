@@ -54,7 +54,7 @@ import drawerCover              from "../../assets/drawer-cover.png";
 import drawerImage              from "../../assets/logo-kitchen-sink.png";
 
 const deviceHeight = Dimensions.get("window").height;
-const deviceWidth = Dimensions.get("window").width;
+const deviceWidth  = Dimensions.get("window").width;
 export default {
   props: {
     navigation: {
@@ -70,8 +70,8 @@ export default {
           height: deviceHeight / 3.5
         },
         drawerImageObj: {
-          left: (Platform.OS === "android" ? deviceWidth  / 10 : deviceWidth / 9  ),
-          top:  (Platform.OS === "android" ? deviceHeight / 13 : deviceHeight / 12),
+          left:      (Platform.OS === "android" ? deviceWidth  / 10 : deviceWidth / 9  ),
+          top:       (Platform.OS === "android" ? deviceHeight / 13 : deviceHeight / 12),
           resizeMode: "cover"
         },
         badgeText: {

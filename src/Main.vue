@@ -14,6 +14,8 @@ import {
 import { Root }                 from "native-base";
 import HomeScreen               from "./screens/Home.vue";
 import SideBarScreen            from "./screens/Sidebar.vue";
+import HamburgerHeader          from "./screens/HamburgerHeader.vue";              
+//
 import OrderScreen              from "./screens/Order.vue";
 import ProductsScreen           from "./screens/ProductList.vue";
 import SettingsScreen           from "./screens/Settings.vue";

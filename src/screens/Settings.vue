@@ -1,37 +1,30 @@
 <template>
 <nb-container :style="{ backgroundColor: '#fff' }">
-  
-    <nb-header>
-      <nb-left>
-        <nb-button transparent :onPress="() => this.props.navigation.goBack()">
-          <nb-icon name="arrow-back" />
-        </nb-button>
-      </nb-left>
-      <nb-body>
-        <nb-title>List Icon</nb-title>
-      </nb-body>
-      <nb-right />
-    </nb-header>
+  <HamburgerHeader title="Settings" :navigation="this.props.navigation" />
     
     <nb-content padder>
       <nb-separator bordered noTopBorder />
+
+      
       <nb-list-item icon>
         <nb-left>
           <nb-button :style="{ backgroundColor: '#FF9501' }">
-            <nb-icon active name="airplane" />
+            <nb-icon active name="flame" />
           </nb-button>
         </nb-left>
         <nb-body>
-          <nb-text>Airplane Mode</nb-text>
+          <nb-text>Turbo Boost</nb-text>
         </nb-body>
         <nb-right>
           <nb-switch
-            :value="airplaneMode"
-            :onChange="toggleAirplaneMode"
+            :value="turboBoost"
+            :onChange="toggleTurboBoost"
             :trackColor="{ true: '#50B948' }"
           />
         </nb-right>
       </nb-list-item>
+
+      
       <nb-list-item icon>
         <nb-left>
           <nb-button :style="{ backgroundColor: '#007AFF' }">
@@ -42,24 +35,12 @@
           <nb-text>Wi-Fi</nb-text>
         </nb-body>
         <nb-right>
-          <nb-text>GeekyAnts</nb-text>
+          <nb-text>Tooksome</nb-text>
           <nb-icon active name="arrow-forward" v-if="osType === 'ios'" />
         </nb-right>
       </nb-list-item>
-      <nb-list-item icon>
-        <nb-left>
-          <nb-button :style="{ backgroundColor: '#007AFF' }">
-            <nb-icon active name="bluetooth" />
-          </nb-button>
-        </nb-left>
-        <nb-body>
-          <nb-text>Bluetooth</nb-text>
-        </nb-body>
-        <nb-right>
-          <nb-text>On</nb-text>
-          <nb-icon active name="arrow-forward" v-if="osType === 'ios'" />
-        </nb-right>
-      </nb-list-item>
+
+      
       <nb-list-item icon>
         <nb-left>
           <nb-button :style="{ backgroundColor: '#4CDA64' }">
@@ -67,69 +48,15 @@
           </nb-button>
         </nb-left>
         <nb-body>
-          <nb-text>Mobile Data</nb-text>
+          <nb-text>Chillin</nb-text>
         </nb-body>
         <nb-right>
           <nb-radio selected />
         </nb-right>
       </nb-list-item>
-      <nb-list-item icon last>
-        <nb-left>
-          <nb-button :style="{ backgroundColor: '#4CDA64' }">
-            <nb-icon active name="link" />
-          </nb-button>
-        </nb-left>
-        <nb-body>
-          <nb-text>Personal Hotspot</nb-text>
-        </nb-body>
-        <nb-right>
-          <nb-text>Off</nb-text>
-          <nb-icon active name="arrow-forward" v-if="osType === 'ios'" />
-        </nb-right>
-      </nb-list-item>
-
+      
       <nb-separator bordered />
 
-      <nb-list-item icon>
-        <nb-left>
-          <nb-button :style="{ backgroundColor: '#FD3C2D' }">
-            <nb-icon active name="notifications" />
-          </nb-button>
-        </nb-left>
-        <nb-body>
-          <nb-text>Notifications</nb-text>
-        </nb-body>
-        <nb-right>
-          <nb-icon active name="arrow-forward" v-if="osType === 'ios'" />
-        </nb-right>
-      </nb-list-item>
-      <nb-list-item icon>
-        <nb-left>
-          <nb-button :style="{ backgroundColor: '#8F8E93' }">
-            <nb-icon active name="switch" />
-          </nb-button>
-        </nb-left>
-        <nb-body>
-          <nb-text>Control Center</nb-text>
-        </nb-body>
-        <nb-right>
-          <nb-icon active name="arrow-forward" v-if="osType === 'ios'" />
-        </nb-right>
-      </nb-list-item>
-      <nb-list-item icon last>
-        <nb-left>
-          <nb-button :style="{ backgroundColor: '#5855D6' }">
-            <nb-icon active name="moon" />
-          </nb-button>
-        </nb-left>
-        <nb-body>
-          <nb-text>Do Not Disturb</nb-text>
-        </nb-body>
-        <nb-right>
-          <nb-text>Yes</nb-text>
-        </nb-right>
-      </nb-list-item>
-      <nb-separator bordered />
       <nb-list-item icon>
         <nb-left>
           <nb-button :style="{ backgroundColor: '#4CDA64' }">
@@ -137,37 +64,25 @@
           </nb-button>
         </nb-left>
         <nb-body>
-          <nb-text>Pick SIM</nb-text>
+          <nb-text>Pick Spice</nb-text>
         </nb-body>
         <nb-right>
           <nb-picker
             note
-            iosHeader="Select Your Sim"
+            iosHeader="Spice Girl?"
             :iosIcon="getIosIconForPicker()"
             mode="dropdown"
-            :selectedValue="selected1"
+            :selectedValue="spice"
             :onValueChange="onValueChange"
           >
-            <nb-item label="TATA" value="key0" />
-            <nb-item label="AIRTEL" value="key1" />
+            <nb-item label="Scary"  value="scary"  />
+            <nb-item label="Posh"   value="posh"   />
+            <nb-item label="Baby"   value="baby"   />
+            <nb-item label="Ginger" value="ginger" />
           </nb-picker>
         </nb-right>
       </nb-list-item>
-      <nb-list-item icon>
-        <nb-left>
-          <nb-button :style="{ backgroundColor: '#8F8E93' }">
-            <nb-icon active name="cog" />
-          </nb-button>
-        </nb-left>
-        <nb-body>
-          <nb-text>Software Update</nb-text>
-        </nb-body>
-        <nb-right>
-          <nb-badge :style="{ backgroundColor: '#FD3C2D' }">
-            <nb-text>2</nb-text>
-          </nb-badge>
-        </nb-right>
-      </nb-list-item>
+      
       <nb-list-item last icon>
         <nb-left>
           <nb-button :style="{ backgroundColor: '#007AFF' }">
@@ -175,37 +90,43 @@
           </nb-button>
         </nb-left>
         <nb-body>
-          <nb-text>Privacy</nb-text>
+          <nb-text>Talk to the Hand</nb-text>
         </nb-body>
         <nb-right>
           <nb-icon active name="arrow-forward" v-if="osType === 'ios'" />
         </nb-right>
       </nb-list-item>
+      
     </nb-content>
   </nb-container>
 </template>
 
 <script>
-import React from "react";
-import { Platform } from "react-native";
-import { Icon } from "native-base";
+import React           from "react";
+import { Platform }    from "react-native";
+import { Icon }        from "native-base";
+import HamburgerHeader from "./HamburgerHeader.vue";
+
 export default {
   data() {
     return {
-      osType: Platform.OS,
-      selected1: "key1",
-      airplaneMode: false
+      osType:      Platform.OS,
+      spice:       "posh",
+      turboBoost:  false
     };
+  },
+  components: {
+    HamburgerHeader,
   },
   methods: {
     onValueChange(value) {
-      this.selected1 = value;
+      this.spice = value;
     },
     getIosIconForPicker() {
       return <Icon name="ios-arrow-down" />;
     },
-    toggleAirplaneMode() {
-      this.airplaneMode = !this.airplaneMode;
+    toggleTurboBoost() {
+      this.turboBoost = !this.turboBoost;
     }
   }
 };
