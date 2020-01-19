@@ -55,12 +55,13 @@
   </nb-button>
 </view>
 
-<nb-button iconLeft light
-           :onPress="()=>{ newTodoScreen = !newTodoScreen }" >
-  <nb-icon active name="add"  :style="{ fontSize: 30, color: 'red' }" />
-  <nb-text :style="{ color: 'red' }">Add</nb-text>
-</nb-button>
-
+ <nb-fab 
+   :onPress="()=>{ newTodoScreen = !newTodoScreen }"
+   position="bottomRight"
+   >
+   <nb-icon active  name="add" :style="{ fontSize: 50, color: 'red' }" />
+ </nb-fab>
+ 
 </view>
 </template>
 
@@ -237,5 +238,10 @@ export default {
   margin-bottom:       15px;
   font-size:           26px;
   font-weight:         bold;
+}
+
+.add-icon {
+  font-size: 50px;
+  color: red;
 }
 </style>
