@@ -8,8 +8,12 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "async-storage": "^0.1.0",
+    "axios": "^0.19.1",
+    "date-fns": "^2.9.0",
     "expo": "~36.0.0",
     "expo-font": "~8.0.0",
+    "marked": "^0.8.0",
     "native-base": "^2.13.8",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -18,13 +22,17 @@
     "react-native-paper": "^3.4.0",
     "react-native-reanimated": "^1.7.0",
     "react-native-web": "~0.11.7",
+    "vue-axios": "^2.1.5",
     "vue-native-core": "0.1.4",
     "vue-native-helper": "0.1.4",
-    "vue-native-router": "^0.1.1"
+    "vue-native-router": "^0.1.1",
+    "vuelidate": "^0.7.5",
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
     "babel-preset-expo": "~8.0.0",
+    "react-test-renderer": "^16.12.0",
     "vue-native-scripts": "0.1.4"
   },
   "private": true
